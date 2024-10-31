@@ -54,7 +54,6 @@ function display(text){
 }
  
 function backspace() {
-    // Geride kalan sayı içinde nokta var mı kontrol et
     if (result.innerText.endsWith('.')) {
         decimalAdded = false
     }
@@ -272,7 +271,7 @@ function toAddEmpthEndOfResult(){
 document.addEventListener('keydown', function(event) {
     const key = event.key
 
-    // Kullanıcı tuşlara basıldığında hangi fonksiyonun çalıştırılacağını kontrol et
+    
     switch (key) {
         case 'c':
         case 'C':
