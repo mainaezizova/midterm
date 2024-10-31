@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>   
+      <div class="task">
+           <div class="calculator">
+             <div class="display">
+               <div class="condition"></div>
+                 <div class="result-container">
+                     <p class="symbol">=</p>
+                     <h2 class="result">0</h2>
+                 </div>
+                 <hr class="line">
+                 </div>
+           <div class="keys">
+               <div>
+                <input type="button" value="C" class="key operator" onclick="display('')" style="background-color: rgb(116,235,213); color: white;" data-key=" ">
+                <input type="button" value="/" class="key" onclick="division()" style="background-color: rgb(116,235,213); color: white;" data-key="/">
+                <input type="button" value="%" class="key operator" onclick="percentage()" style="background-color: rgb(116,235,213); color: white;" data-key="%">
+                <input type="button" value="*" class="key operator" onclick="multiplication()" style="background-color: rgb(116,235,213); color: white;" data-key="*">
+              </div>
+              <div>
+                <input type="button" value="7" class="key" onclick="display('7')" data-key="7">
+                <input type="button" value="8" class="key" onclick="display('8')" data-key="8">
+                <input type="button" value="9" class="key" onclick="display('9')" data-key="9">
+                <input type="button" value="±" class="key operator" onclick="plusMinus()" style="background-color:rgb(116,235,213); color: white;" data-key="t">
+               
+
+              </div>
+              <div>
+                <input type="button" value="4" class="key" onclick="display('4')" data-key="4">
+                <input type="button" value="5" class="key" onclick="display('5')" data-key="5">
+                <input type="button" value="6" class="key" onclick="display('6')" data-key="6">
+                <input type="button" value="-" class="key operator" onclick="subtraction()" style="background-color: rgb(116,235,213); color: white;" data-key="-">
+
+              </div>
+              <div>
+
+                <input type="button" value="1" class="key" onclick="display('1')" data-key="1">
+                <input type="button" value="2" class="key" onclick="display('2')" data-key="2">
+                <input type="button" value="3" class="key" onclick="display('3')" data-key="3">
+                <input type="button" value="+" class="key operator" onclick="addition()" style="background-color: rgb(116,235,213); color: white;" data-key="+">
+              </div>
+              <div>
+                <input type="button" value="." class="key" onclick="Point('.')" data-key=".">
+                <input type="button" value="0" class="key" onclick="display('0')" data-key="0">
+                <input type="button" value="&#x2190" class="key" onclick="backspace()" style="background-color: rgb(116,235,213); color: white;" data-key="d">
+                <input type="button" value="=" class="key" onclick="equalSign()" style="background-color: rgb(116,235,213); color: white;" data-key="=">
+
+              </div>
+            </div>
+            
+
+          </div>
+        </div>
+        <script src="app.js"></script>
+
+    </body>
+</html>
