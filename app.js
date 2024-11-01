@@ -1,11 +1,11 @@
 let output = document.querySelector(".output")
 let condition = document.querySelector(".condition")
-let symbol = ""
+let operator = ""
 let flag = false
 
 function display(text){
     if(text == ''){
-        symbol = ''
+        operator = ''
         output.innerText = ''
         condition.innerText = ''
         flag = false
@@ -19,7 +19,7 @@ function display(text){
         flag = false
     }
     if(flag && text !== ''){
-        let temp1 = output.innerText.split(symbol)
+        let temp1 = output.innerText.split(operator)
         let temp2 = temp1[1].split('')
         if(temp2[0] === '('){
             temp2.shift()
@@ -32,7 +32,7 @@ function display(text){
             temp2.push(')')
         }
         temp2 = temp2.toString().replaceAll(",","")
-        output.innerText = `${temp1[0]}${symbol}${temp2}`
+        output.innerText = `${temp1[0]}${operator}${temp2}`
         console.log(temp2)
         return
     }
@@ -67,23 +67,23 @@ function backspace() {
         output.innerText = temp.join('').trim()
     }
     if (output.innerText === '') {
-        symbol = '' 
+        operator = '' 
     } else {
         if (lastChar.trim() === '+' || lastChar.trim() === '-' || lastChar.trim() === '*' || lastChar.trim() === '/') {
-            symbol = '' 
+            operator = '' 
         }
     }
 }
 
 function calculate() {
     let answer = output.innerText
-    let temp = output.innerText.split(symbol)
+    let temp = output.innerText.split(operator)
 
     let num1 = Number(temp[0].trim())
     let num2 = Number(temp[1].trim())
     let operation = ''
 
-    switch (symbol) {
+    switch (operator) {
         case ' + ':
             answer = num1 + num2
             operation = `${num1} + ${num2}`
@@ -110,7 +110,7 @@ function checkSymbol(){
     let temp
     let isSecondNumEmpty = false
 
-    switch(symbol){
+    switch(operator){
         case " + ":
             temp = output.innerText.split(" +")
             console.log(temp)
@@ -153,13 +153,13 @@ function checkSymbol(){
 let decimalAdded = false
 
 function Point() {
-    if (symbol === '') {
+    if (operator=== '') {
         if (!output.innerText.includes('.') && !checkSymbol()) {
             display('.')
             decimalAdded = true
         }
     } else {
-        let temp = output.innerText.split(symbol)
+        let temp = output.innerText.split(operator)
         console.log(temp[1])
         if (temp[1] !== '' && !temp[1].includes('.')) {
             display('.')
@@ -170,10 +170,10 @@ function Point() {
 
 function addition() {
     if (output.innerText !== '0' && !checkSymbol()) {
-        if (symbol) {
+        if (operator) {
             output.innerText = calculate();
         }
-        symbol = " + "
+        operator = " + "
         output.innerText += " + " 
         flag = false
     }
@@ -181,30 +181,30 @@ function addition() {
 
 function division() {
     if (output.innerText !== '0' && !checkSymbol()) {
-        if (symbol) {
+        if (operator) {
             output.innerText = calculate()
         }
-        symbol = " / "
+        operator= " / "
         output.innerText += " / " 
         flag = false 
     }
 }
 function subtraction() {
     if (output.innerText !== '0' && !checkSymbol()) {
-        if (symbol) {
+        if (operator) {
             output.innerText = calculate() 
         }
-        symbol = " - "
+        operator= " - "
         output.innerText += " - " 
         flag = false 
     }
 }
 function multiplication() {
     if (output.innerText !== '0' && !checkSymbol()) {
-        if (symbol) {
+        if (operator) {
             output.innerText = calculate() 
         }
-        symbol = " * "
+        operator= " * "
         output.innerText += " * " 
         flag = false
     }
@@ -213,7 +213,7 @@ function multiplication() {
 function equalSign() {
     let resultValue = calculate()
     output.innerText = resultValue
-    symbol = '' 
+    operator = '' 
     flag = true 
     decimalAdded = false
 }
@@ -221,14 +221,14 @@ function equalSign() {
 function percentage() {
     let currentText =output.innerText.trim()
     
-    if (symbol) {
-        let temp = currentText.split(symbol)
+    if (operator) {
+        let temp = currentText.split(operator)
         
         if (temp.length === 2) {
             let num2 = Number(temp[1].trim())
             if (!isNaN(num2)) {
                 num2 = num2 / 100 
-                output.innerText = `${temp[0].trim()} ${symbol} ${num2}` 
+                output.innerText = `${temp[0].trim()} ${operator} ${num2}` 
                 return
             }
         }
@@ -243,8 +243,8 @@ function percentage() {
 function plusMinus() {
     let currentText = output.innerText.trim()
     
-    if (symbol) {
-        let temp1 = currentText.split(symbol)
+    if (operator) {
+        let temp1 = currentText.split(operator)
         
         if (temp1.length === 2) {
             let num2 = temp1[1].trim()
@@ -253,8 +253,8 @@ function plusMinus() {
             } else {
                 num2 = '-' + num2 
             }
-            output.innerText = `${temp1[0].trim()} ${symbol} ${num2}`
-        }
+            output.innerText = `${temp1[0].trim()} ${operator} ${num2}`
+        } 
     } else {
         let singleNum = Number(currentText)
         if (!isNaN(singleNum)) {
