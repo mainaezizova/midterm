@@ -1,0 +1,1 @@
+Muellim noqte sehvini duzeltdim
