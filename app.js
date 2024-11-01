@@ -3,7 +3,23 @@ let condition = document.querySelector(".condition")
 let operator = ""
 let flag = false
 
+
+function getCurrentNumber() {
+    const currentValue = output.innerText;
+    const currentNumber = currentValue.split(/[\+\-\*\/\%]/).pop();
+    return currentNumber;
+}
+
+
+function Point() {
+    const currentNumber = getCurrentNumber();
+    if (!currentNumber.includes(".")) {
+        display(".");
+    }
+}
+
 function display(text){
+   
     if(text == ''){
         operator = ''
         output.innerText = ''
@@ -152,21 +168,7 @@ function checkSymbol(){
 
 let decimalAdded = false
 
-function Point() {
-    if (operator=== '') {
-        if (!output.innerText.includes('.') && !checkSymbol()) {
-            display('.')
-            decimalAdded = true
-        }
-    } else {
-        let temp = output.innerText.split(operator)
-        console.log(temp[1])
-        if (temp[1] !== '' && !temp[1].includes('.')) {
-            display('.')
-            decimalAdded = true 
-        }
-    }
-}
+
 
 function addition() {
     if (output.innerText !== '0' && !checkSymbol()) {
