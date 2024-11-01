@@ -37,6 +37,19 @@ body {
     margin: 10px;
     font-family: Roboto ,sans-serif;
 }
+
+.keys input:hover {
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.5); 
+    cursor: pointer; 
+    transition: box-shadow 0.3s ease; 
+    opacity: 0.9;
+
+}
+
+.keys input:active{
+    opacity: 0.8;
+}
+
 .output-container{
     width: 100%;
     display: flex;
@@ -44,7 +57,7 @@ body {
     align-items: center;
     padding-bottom: calc(0.5rem + 0.5vw);
 }
-.symbol{
+.operator{
     font-size: calc(0.8rem + 0.5vw);
 }
 
