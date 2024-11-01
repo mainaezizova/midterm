@@ -1,4 +1,4 @@
-let result = document.querySelector(".result")
+let output = document.querySelector(".output")
 let condition = document.querySelector(".condition")
 let symbol = ""
 let flag = false
@@ -6,20 +6,20 @@ let flag = false
 function display(text){
     if(text == ''){
         symbol = ''
-        result.innerText = ''
+        output.innerText = ''
         condition.innerText = ''
         flag = false
         return
     }
-    if (result.innerText.trim() === '' && (text === '+' || text === '-' || text === '*' || text === '/')) {
+    if (output.innerText.trim() === '' && (text === '+' || text === '-' || text === '*' || text === '/')) {
         return
     }
-    if (result.innerText === '0' || flag) {
-        result.innerText = ''
+    if (output.innerText === '0' || flag) {
+        output.innerText = ''
         flag = false
     }
     if(flag && text !== ''){
-        let temp1 = result.innerText.split(symbol)
+        let temp1 = output.innerText.split(symbol)
         let temp2 = temp1[1].split('')
         if(temp2[0] === '('){
             temp2.shift()
@@ -32,41 +32,41 @@ function display(text){
             temp2.push(')')
         }
         temp2 = temp2.toString().replaceAll(",","")
-        result.innerText = `${temp1[0]}${symbol}${temp2}`
+        output.innerText = `${temp1[0]}${symbol}${temp2}`
         console.log(temp2)
         return
     }
     
     
-    if(result.innerText == '0'){
+    if(output.innerText == '0'){
         if(text !== '.'){
             if(text.split('').length !=3){
-                result.innerText = text
+                output.innerText = text
                 return
             }
         }
     }
-    if(toAddEmpthEndOfResult()){
-        result.innerText += ` ${text}`
+    if(toAddEmptyEndOfResult()){
+        output.innerText += ` ${text}`
         return
     }
-        result.innerText += text 
+    output.innerText += text 
 }
  
 function backspace() {
-    if (result.innerText.endsWith('.')) {
+    if (output.innerText.endsWith('.')) {
         decimalAdded = false
     }
     
-    let temp = result.innerText.split('')
+    let temp = output.innerText.split('')
     let lastChar = temp.pop() 
 
     if (!isNaN(lastChar.trim())) {
-        result.innerText = temp.join('').trim()
+        output.innerText = temp.join('').trim()
     } else {
-        result.innerText = temp.join('').trim()
+        output.innerText = temp.join('').trim()
     }
-    if (result.innerText === '') {
+    if (output.innerText === '') {
         symbol = '' 
     } else {
         if (lastChar.trim() === '+' || lastChar.trim() === '-' || lastChar.trim() === '*' || lastChar.trim() === '/') {
@@ -76,8 +76,8 @@ function backspace() {
 }
 
 function calculate() {
-    let answer = result.innerText
-    let temp = result.innerText.split(symbol)
+    let answer = output.innerText
+    let temp = output.innerText.split(symbol)
 
     let num1 = Number(temp[0].trim())
     let num2 = Number(temp[1].trim())
@@ -108,117 +108,118 @@ function calculate() {
 
 function checkSymbol(){
     let temp
-    let isSecondSizeIsEmpty = false
+    let isSecondNumEmpty = false
 
     switch(symbol){
         case " + ":
-            temp = result.innerText.split(" +")
+            temp = output.innerText.split(" +")
             console.log(temp)
             if(temp[1] == ''){
-                isSecondSizeIsEmpty = true
+                isSecondNumEmpty = true
             }else{
-                isSecondSizeIsEmpty = false
+                isSecondNumEmpty= false
             }
             break
         case " / ":
-            temp = result.innerText.split(" /")
+            temp = output.innerText.split(" /")
             if(temp[1] == ''){
-                isSecondSizeIsEmpty = true
+                isSecondNumEmpty= true
             }else{
-                isSecondSizeIsEmpty = false
+                isSecondNumEmpty = false
             }
             break
         case " - ":
-            temp = result.innerText.split(" -")
+            temp = output.innerText.split(" -")
             if(temp[1] == ''){
-                isSecondSizeIsEmpty = true
+                isSecondNumEmpty= true
             }else{
-                isSecondSizeIsEmpty = false
+                isSecondNumEmpty = false
             }
             break
         case " * ":
-            temp = result.innerText.split(" *")
+            temp = output.innerText.split(" *")
             if(temp[1] == ''){
-                isSecondSizeIsEmpty = true
+                isSecondNumEmpty= true
             }else{
-                isSecondSizeIsEmpty = false
+                isSecondNumEmpty= false
             }
             break
     }
-    console.log(isSecondSizeIsEmpty)
+    console.log(isSecondNumEmpty)
 
-    return isSecondSizeIsEmpty
+    return isSecondNumEmpty
 }
 
 let decimalAdded = false
 
 function Point() {
     if (symbol === '') {
-        if (!result.innerText.includes('.') && !checkSymbol()) {
+        if (!output.innerText.includes('.') && !checkSymbol()) {
             display('.')
             decimalAdded = true
         }
     } else {
-        let temp = result.innerText.split(symbol)
+        let temp = output.innerText.split(symbol)
+        console.log(temp[1])
         if (temp[1] !== '' && !temp[1].includes('.')) {
             display('.')
-            decimalAdded = true // Nokta eklendi
+            decimalAdded = true 
         }
     }
 }
 
 function addition() {
-    if (result.innerText !== '0' && !checkSymbol()) {
+    if (output.innerText !== '0' && !checkSymbol()) {
         if (symbol) {
-            result.innerText = calculate();
+            output.innerText = calculate();
         }
         symbol = " + "
-        result.innerText += " + " 
+        output.innerText += " + " 
         flag = false
     }
 }
 
 function division() {
-    if (result.innerText !== '0' && !checkSymbol()) {
+    if (output.innerText !== '0' && !checkSymbol()) {
         if (symbol) {
-            result.innerText = calculate()
+            output.innerText = calculate()
         }
         symbol = " / "
-        result.innerText += " / " 
+        output.innerText += " / " 
         flag = false 
     }
 }
 function subtraction() {
-    if (result.innerText !== '0' && !checkSymbol()) {
+    if (output.innerText !== '0' && !checkSymbol()) {
         if (symbol) {
-            result.innerText = calculate() 
+            output.innerText = calculate() 
         }
         symbol = " - "
-        result.innerText += " - " 
+        output.innerText += " - " 
         flag = false 
     }
 }
 function multiplication() {
-    if (result.innerText !== '0' && !checkSymbol()) {
+    if (output.innerText !== '0' && !checkSymbol()) {
         if (symbol) {
-            result.innerText = calculate() 
+            output.innerText = calculate() 
         }
         symbol = " * "
-        result.innerText += " * " 
+        output.innerText += " * " 
         flag = false
     }
 }
 
 function equalSign() {
     let resultValue = calculate()
-    result.innerText = resultValue
+    output.innerText = resultValue
     symbol = '' 
     flag = true 
     decimalAdded = false
 }
 
 function percentage() {
-    let currentText = result.innerText.trim()
+    let currentText =output.innerText.trim()
     
     if (symbol) {
         let temp = currentText.split(symbol)
@@ -227,7 +228,7 @@ function percentage() {
             let num2 = Number(temp[1].trim())
             if (!isNaN(num2)) {
                 num2 = num2 / 100 
-                result.innerText = `${temp[0].trim()} ${symbol} ${num2}` 
+                output.innerText = `${temp[0].trim()} ${symbol} ${num2}` 
                 return
             }
         }
@@ -235,12 +236,12 @@ function percentage() {
 
     let singleNum = Number(currentText)
     if (!isNaN(singleNum)) {
-        result.innerText = (singleNum / 100).toString()
+        output.innerText = (singleNum / 100).toString()
     }
 }
 
 function plusMinus() {
-    let currentText = result.innerText.trim()
+    let currentText = output.innerText.trim()
     
     if (symbol) {
         let temp1 = currentText.split(symbol)
@@ -252,26 +253,26 @@ function plusMinus() {
             } else {
                 num2 = '-' + num2 
             }
-            result.innerText = `${temp1[0].trim()} ${symbol} ${num2}`
+            output.innerText = `${temp1[0].trim()} ${symbol} ${num2}`
         }
     } else {
         let singleNum = Number(currentText)
         if (!isNaN(singleNum)) {
-            result.innerText = (-singleNum).toString() 
+            output.innerText = (-singleNum).toString() 
         }
-    }
+    }  result
 }
 
-function toAddEmpthEndOfResult(){
-    let temp = result.innerText.split('')
+function toAddEmptyEndOfResult(){
+    let temp = output.innerText.split('')
     if(temp[temp.length-1] == "-" || temp[temp.length-1] == "+" || temp[temp.length-1] == "/" || temp[temp.length-1] == "*"){
         return true
     }
 }
+
 document.addEventListener('keydown', function(event) {
     const key = event.key
 
-    
     switch (key) {
         case 'c':
         case 'C':
